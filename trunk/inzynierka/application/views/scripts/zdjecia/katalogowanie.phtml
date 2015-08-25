@@ -1,0 +1,48 @@
+<?= $this->headLink()->appendStylesheet($this->baseUrl() . '/css/uploadify.css'); ?>
+<?= $this->headScript()->appendFile($this->baseUrl() . '/js/jquery/jquery-1.4.3.min.js')
+                       ->appendFile($this->baseUrl() . '/js/uploadify/swfobject.js')
+                       ->appendFile($this->baseUrl() . '/js/uploadify/jquery.uploadify.v2.1.4.min.js'); ?>
+
+<script type="text/javascript">
+$(function() {   
+        $('#file_upload').uploadify({
+            'uploader'    : '/js/uploadify/uploadify.swf',
+            'script'      : '<?php echo $this->url(
+                              array('controller' => 'zdjecia',
+                                    'action' => 'katalogowanie'));
+                             ?>',
+            'cancelImg'   : '/js/uploadify/cancel.png',
+            'folder'      : '/' + '<?php echo $this->sciezka; ?>',
+            'multi'		    : 'true',
+            'fileExt'	    : '*.jpg',
+            'fileDesc'	  : '.jpg',
+            'displayData' : 'speed',
+            'auto'        : false
+        });
+});
+</script>
+    <a href="<?= $this->baseUrl(); ?>/zdjecia/" title="Powrót"
+       style="float: left;">
+        <img src="<?= $this->baseUrl(); ?>/images/back.png"
+             title="Powrót"
+             alt="powrot" />
+    </a>
+
+<h3 style="margin-top: 14px;">Wybierz pliki do skatalogowania.</h3>
+<div id="upload">
+    <a href="javascript:$('#file_upload').uploadifyClearQueue();"
+       style="float: right; margin-right: 1030px;">
+        <img src="<?= $this->baseUrl(); ?>/images/clear.png"
+             alt="Wyczyść listę"
+             title="Wyczyść listę"
+             />
+    </a>
+    <a href="javascript:$('#file_upload').uploadifyUpload();"
+       style="float: right; margin-right: 10px; margin-top: -4px;">
+        <img src="<?= $this->baseUrl(); ?>/images/kataloguj.png"
+             alt="Kataloguj zdjęcia"
+             title="Kataloguj zdjęcia"
+             />
+    </a>
+    <input id="file_upload" name="file_upload" type="file" />
+</div>

@@ -1,0 +1,83 @@
+/* 
+    Document   : myui
+    Created on : 2010-12-11, 11:54:46
+    Author     : zieli
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+/************************************/
+/*           dialog window          */
+/************************************/
+.myui {
+    font-size: 10px;
+}
+.myui form p, .myui .ui-tabs p {
+    margin:.5em;
+}
+.myui .ui-dialog-titlebar {
+    padding: .2em .1em .1em .8em;
+}
+.myui .ui-dialog-buttonpane {
+    padding: .1em 1em .1em .4em;
+    font-size:.9em;
+}
+.myui .ui-dialog-content {
+    padding:5px;
+}
+
+.myui hr {
+    border:0;
+    border-bottom: 1px #ccc solid;
+    clear:both
+}
+.myui ul {
+    margin-top:0;
+}
+
+.myui kbd { font-size:1.2em;}
+.myui a { outline: none;}
+
+.myui textarea {
+    width:100%;
+    height:400px;
+    outline:none;
+    border:1px solid #ccc;
+    font-family: "Monaco", "Andale Mono", "Lucida Console", monospace;
+}
+
+.ui-state-error {
+    margin: 5px 0;
+    padding:.5em;
+    clear:both;
+}
+
+.myui .ui-state-error .ui-icon {
+    float: left;
+    margin-right: .3em;
+}
+
+.myui table {
+    width : 100%;
+}
+
+.myui table td {
+    padding:2px 5px;
+
+}
+
+.myui .ui-tabs {
+    font-size:.98em;
+}
+
+.myui .ui-tabs div {
+    padding:0 .5em;
+}
+.myui .ui-tabs-nav li a {
+    padding:.2em 1em;
+}

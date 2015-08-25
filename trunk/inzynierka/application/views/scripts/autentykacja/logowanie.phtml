@@ -1,0 +1,19 @@
+<?php $this->jQuery()->enable(); ?>
+<script type="text/javascript">
+    $(function() {
+        $("input:submit").button();
+    });
+</script>
+<div class="login_form ui-state-highlight">
+    <span class="ui-state-error center">
+        <?php echo $this->errorMessage; ?>
+    </span>
+    <?php echo $this->form; ?>
+    <div class="rejestracja">
+        Nie masz konta?
+        <a href="<?= $this->baseUrl(); ?>/uzytkownicy/rejestracja">Zarejestruj się</a>
+    </div>
+    <p class="icon_login">
+        <img src="<?php echo $this->baseUrl(); ?>/images/logowanie.png" alt="ikonka"/>
+    </p>
+</div>

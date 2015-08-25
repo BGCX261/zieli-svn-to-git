@@ -1,0 +1,79 @@
+<?php $this->jQuery()->enable(); ?>
+<?php echo $this->headLink()->appendStylesheet($this->baseUrl() . '/css/prettyPhoto.css')
+                            ->appendStylesheet($this->baseUrl() . '/css/myui.css'); ?>
+<?php echo $this->headScript()->appendFile($this->baseUrl() . '/js/metadaneWyswietl.js')
+                              ->appendFile($this->baseUrl() . '/js/prettyPhoto/jquery.prettyPhoto.js')
+                              ->appendFile($this->baseUrl() . '/js/prettyPhoto/settings.js')
+                              ->appendFile($this->baseUrl() . '/js/usunZdjecie.js')
+                              ->appendFile($this->baseUrl() . '/js/szczegoly.js')
+                              ->appendFile($this->baseUrl() . '/js/katalogowanie.js')
+                              ->appendFile($this->baseUrl() . '/js/operacjeGrupowe.js'); ?>
+
+<div class="albumtitle">
+    <?php echo $this->katalog->getName(); ?>
+    <span style="float: right;">
+        <span class="pointer" style="background-color: green; color: black;">
+            <a class="kataloguj" style="text-decoration: none; color: white"
+               href="<?php echo $this->baseUrl()
+                                        . '/zdjecia/katalogowanie/katalog/'
+                                        . $this->katalog->getId(); ?>">
+            Wgraj zdjęcia</a>
+        </span>
+        &nbsp;|&nbsp;
+        <span class="usun_zaznaczone pointer ui-state-highlight">Usuń</span>
+        <span class="opisz pointer ui-state-highlight">Opisz</span>
+        &nbsp;|&nbsp;
+        <span class="zaznacz_wszystkie pointer ui-state-active">Wszystkie</span>
+        <span class="odznacz_wszystkie pointer ui-state-active">Żadne</span>
+        <span class="odwroc_zaznaczenie pointer ui-state-active">Odwróć</span>
+    </span>
+</div>
+<div class="scroller_album">
+    <div class="album">
+        <?php foreach ($this->listaZdjec as $zdjecie) : ?>
+            <div class="zdjecie" id="<?php echo $zdjecie->getId(); ?>">
+
+                <div class="miniatura">
+                <?php
+                //ładowanie miniatur z exifa
+                $file = $this->katalog->getPath() . '/' . $zdjecie->getFilename();
+                $image = exif_thumbnail($file, $width, $height);
+                $s = $width / $height;
+                $h = 100;
+                $w = $h * $s;
+                if($w > 130) $w = 130;
+                ?>
+                <img src='data:image/gif;base64, <?php echo base64_encode($image); ?>'
+                     id="<?php echo $zdjecie->getId(); ?>"
+                     title="<?php echo $zdjecie->getFilename(); ?>"
+                     height="<?php echo $h; ?>px" width="<?php echo $w; ?>px"
+                     class="center" alt=""/>
+                </div>
+
+                <div class="szczegoly" id="<?php echo $zdjecie->getId(); ?>">
+                    <a href="<?php echo $this->baseUrl() . '/' . $this->katalog->getPath() . '/' . $zdjecie->getFilename(); ?>"
+                       rel="prettyPhoto[gallery2]"
+                       title="<?php echo $zdjecie->getFilename(); ?>">
+                        <img src="<?php echo $this->baseUrl(); ?>/images/preview.png"
+                             id="<?php echo $zdjecie->getId(); ?>"
+                             alt="Podgląd" />
+                    </a>
+                    <a href="/zdjecia/pobierz/zdjecie/<?php echo $zdjecie->getId(); ?>">
+                        <img src="<?php echo $this->baseUrl(); ?>/images/save.png"
+                             alt="Pobierz"
+                             title="Pobierz"/>
+                    </a>
+                    <img style="float: right;" class="usun pointer"
+                         id="<?php echo $zdjecie->getId(); ?>"
+                         src="<?php echo $this->baseUrl(); ?>/images/remove.png"
+                         alt="usun"
+                         title="Usuń"/>
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" class="check cb-element"
+                         id="<?php echo $zdjecie->getId(); ?>" />
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>

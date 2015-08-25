@@ -1,0 +1,212 @@
+<?php $this->jQuery()->enable(); ?>
+<?php echo $this->headScript()->appendFile($this->baseUrl() . '/js/jeditable/jquery.jeditable.js')
+                              ->appendFile($this->baseUrl() . '/js/metadaneEdytuj.js'); ?>
+
+<script type="text/javascript">
+    $(function() {
+        var latlng = new google.maps.LatLng(
+                        <?php echo $this->metadane->getGpsLatitude(); ?>,
+                        <?php echo $this->metadane->getGpsLongitude(); ?>
+                     );
+        var myOptions = {
+            zoom: 13,
+            center: latlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"),
+        myOptions);
+    });
+</script>
+
+<script type="text/javascript">
+    $(function() {
+        $( "#tabs" ).tabs();
+    });
+</script>
+
+
+<div class="" style="width: 270px;">
+    <div id="tabs">
+        <ul>
+            <li><a href="#exif">EXIF</a></li>
+            <li><a href="#iptc">IPTC</a></li>
+            <li><a href="#gps">GPS</a></li>
+        </ul>
+        <div id="exif">
+            <table id="<?php echo $this->metadane->getId(); ?>">
+                <thead>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nazwa</td>
+                        <td class="metadane" id="filename"><?php echo $this->metadane->getFilename(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Rozmiar</td>
+                        <td><?php
+$kb = $this->metadane->getFilesize();
+$mb = round($kb / 1024 / 1024, 2);
+echo $mb;
+?> MB
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Typ pliku</td>
+                        <td><?php echo $this->metadane->getMimeType(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Szerokość</td>
+                        <td><?php echo $this->metadane->getWidth(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Wysokość</td>
+                        <td><?php echo $this->metadane->getHeight(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Data wykoniania</td>
+                        <td><?php echo $this->metadane->getDateTimeOriginal(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Producent aparatu</td>
+                        <td><?php echo $this->metadane->getMake(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Model aparatu</td>
+                        <td><?php echo $this->metadane->getModel(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Orientacja</td>
+                        <td><?php echo $this->metadane->getOrientation(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Rozdzielczość w poziomie</td>
+                        <td><?php echo $this->metadane->getXResolution(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Rozdzielczość w pionie</td>
+                        <td><?php echo $this->metadane->getYResolution(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Czas ekspozycji</td>
+                        <td><?php echo $this->metadane->getExposureTime(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Program ekspozycji</td>
+                        <td><?php echo $this->metadane->getExposureProgram(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Tryb ekspozycji</td>
+                        <td><?php echo $this->metadane->getExposureMode(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Przysłona</td>
+                        <td><?php echo $this->metadane->getFNumber(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Ogniskowa</td>
+                        <td><?php echo $this->metadane->getFocalLength(); ?></td>
+                    </tr>
+
+
+                    <tr>
+                        <td>ISO</td>
+                        <td><?php echo $this->metadane->getIsoSpeedRatings(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Źródło światła</td>
+                        <td><?php echo $this->metadane->getLightSource(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Bilans bieli</td>
+                        <td><?php echo $this->metadane->getWhiteBalance(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Lampa błyskowa</td>
+                        <td><?php echo $this->metadane->getFlash(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Zoom cyfrowy</td>
+                        <td><?php echo $this->metadane->getDigitalZoomRatio(); ?></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="iptc">
+            <table>
+                <thead>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nagłówek</td>
+                        <td class="metadane" id="headline"><?php echo $this->metadane->getHeadline(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Opis</td>
+                        <td class="metadane" id="caption"><?php echo $this->metadane->getCaption(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Autor</td>
+                        <td class="metadane" id="writer"><?php echo $this->metadane->getWriter(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Prawa autorskie</td>
+                        <td class="metadane" id="copyrigthNotice"><?php echo $this->metadane->getCopyrightNotice(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Kontakt</td>
+                        <td class="metadane" id="contact"><?php echo $this->metadane->getContact(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Nazwa obiektu</td>
+                        <td class="metadane" id="objectName"><?php echo $this->metadane->getObjectName(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Tytuł autora</td>
+                        <td class="metadane" id="byLineTitle"><?php echo $this->metadane->getByLineTitle(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Miasto</td>
+                        <td class="metadane" id="city"><?php echo $this->metadane->getCity(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Ulica</td>
+                        <td class="metadane" id="subLocation"><?php echo $this->metadane->getSubLocation(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Województwo</td>
+                        <td class="metadane" id="province"><?php echo $this->metadane->getProvince(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Kod państwa</td>
+                        <td class="metadane" id="countryCode"><?php echo $this->metadane->getCountryCode(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Państwo</td>
+                        <td class="metadane" id="country"><?php echo $this->metadane->getCountry(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Słowa kluczowe</td>
+                        <td class="metadane" id="keywords"><?php echo $this->metadane->getKeywords(); ?></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="gps">
+            <div id="map_canvas" style="width:230px; height:200px"></div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Szerokość geograficzna</td>
+                        <td><?php echo $this->metadane->getGpsLatitude(); ?>
+                            <?php echo $this->metadane->getGpsLatitudeRef(); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Długość geograficzna</td>
+                        <td><?php echo $this->metadane->getGpsLongitude(); ?>
+                            <?php echo $this->metadane->getGpsLongitudeRef(); ?></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

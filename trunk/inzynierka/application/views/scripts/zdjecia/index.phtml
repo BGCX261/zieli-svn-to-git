@@ -1,0 +1,60 @@
+<?php $this->jQuery()->enable(); ?>
+<?php echo $this->headScript()->appendFile($this->baseUrl() . '/js/zdjecia.js')
+                              ->appendFile($this->baseUrl() . '/js/wyszukaj.js'); ?>
+<div id="loading"></div>
+<!-- lewa kolumna -->
+<div id="left-column">
+    <!-- przeszukiwanie -->
+    <div class="search">
+        <input type="text" name="filtersearch" id="filtersearch" class="search_input"
+               src="<?php echo $this->baseUrl(); ?>images/search-bg.gif" value="Szukaj.."/>
+        <input type="submit" class="search_btn"  value=""/>
+    </div>
+
+    <!-- Katalogi -->
+    <div id="album_tree">
+        <form name="treelistFrom" method="post" action="#" >
+            <div class="album_head">
+                <h3>Katalogi</h3>
+                <a href="<?= $this->baseUrl(); ?>/katalogi" class="album_edit">
+                    <img src="<?php echo $this->baseUrl(); ?>/images/edit-icon.png"
+                         alt="Edytuj" title="Edytuj" />
+                </a>
+            </div>
+            <?php if($this->lista[0] == null) { ?>
+                    <div class="ui-state-highlight ui-corner-all center" style="width: 200px; margin-top: 15px; padding:5px;">
+                        <span class="ui-icon ui-icon-info" style="float: left"></span>
+                        Aktualnie brak katalogu. W celu dodania, usunięcia bądź edycji nazwy katalogu wybierz ikonę edycji.
+                    </div>
+            <?php } ?>
+            <ul id="album_list">
+                <?php $lz = 0; ?>
+                <?php foreach ($this->lista as $katalog) : ?>
+                    <li class="" id="<?php echo $katalog->getId(); ?>">
+                    <?php echo $katalog->getName(); ?>&nbsp;
+                    (<?php echo $this->liczba_zdjec[$lz++]; ?>)
+                </li>
+                <?php endforeach; ?>
+            </ul>
+        </form>
+    </div>
+</div>
+
+<!-- miniaturki -->
+<div id="middle-column">
+    <div class="container_album">
+            <!-- tutaj są wyświetlane miniaturki zdjęć -->
+            <div class="ui-state-highlight ui-corner-all center" style="width: 240px; margin-top: 15px; padding:5px;">
+                <span class="ui-icon ui-icon-info" style="float: left"></span>
+                Wybierz katalog, aby zobaczyć, dodać lub opisać zdjęcia.
+            </div>
+    </div>
+</div>
+
+<div id="right-column">
+    <!-- METADANE -->
+    <div class="ui-state-highlight ui-corner-all center" style="width: 200px; margin-top: 15px; margin-left: 25px; padding:5px;">
+        <span class="ui-icon ui-icon-info" style="float: left"></span>
+        Szczegółowe informacje zdjęcia, widoczne po jego wybraniu.
+    </div>
+</div>

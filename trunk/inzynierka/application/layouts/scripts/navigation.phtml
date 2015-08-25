@@ -1,0 +1,23 @@
+<div class="navigation">
+    <?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
+        <div class="account">
+            Zalogowany: <?php echo Zend_Auth::getInstance()->getIdentity()->firstname . ' ';
+                              echo Zend_Auth::getInstance()->getIdentity()->lastname;?><br />
+            <?php if ($this->suma_zdjec != null) { ?>
+                Ilość zdjęć: <?php echo $this->suma_zdjec; ?> <br />
+                Zajęte miejsce: <?php echo $this->rozmiar_zdjec; ?> MB<br />
+            <?php } ?>
+        </div>
+        <div class="logout">
+            <a href="<?php echo $this->baseUrl(); ?>/autentykacja/wylogowanie" title="Wyloguj" >
+                <img src="<?php echo $this->baseUrl(); ?>/images/logout.png" alt="Wyloguj" />
+            </a>
+        </div>
+    <?php } else { ?>
+        <a href="<?php echo $this->baseUrl(); ?>/autentykacja/logowanie" title="Zaloguj się">
+            <img src="<?php echo $this->baseUrl(); ?>/images/login.png" alt="Zaloguj się"
+                 style="padding-top: 5px;"/>
+        </a>
+    <p style="float: right; margin-right: 140px;">Zaloguj się i korzystaj z aplikacji.</p>
+<?php } ?>
+</div>

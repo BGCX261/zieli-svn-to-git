@@ -1,0 +1,11 @@
+<?php $this->jQuery()->enable(); ?>
+<script type="text/javascript">
+    $(function() {
+       $('input:submit').button();
+    });
+</script>
+
+<div class="ui-state-active ui-corner-all register-form">
+    <?php echo $this->errorMessage; ?>
+    <?php echo $this->form; ?>
+</div>

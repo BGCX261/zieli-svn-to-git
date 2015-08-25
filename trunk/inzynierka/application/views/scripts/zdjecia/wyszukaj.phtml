@@ -1,0 +1,79 @@
+<?php $this->jQuery()->enable(); ?>
+<?php echo $this->headLink()->appendStylesheet($this->baseUrl() . '/css/prettyPhoto.css')
+                            ->appendStylesheet($this->baseUrl() . '/css/myui.css'); ?>
+<?php
+echo $this->headScript()->appendFile($this->baseUrl() . '/js/metadaneWyswietl.js')
+                        ->appendFile($this->baseUrl() . '/js/prettyPhoto/jquery.prettyPhoto.js')
+                        ->appendFile($this->baseUrl() . '/js/prettyPhoto/settings.js')
+                        ->appendFile($this->baseUrl() . '/js/usunZdjecie.js')
+                        ->appendFile($this->baseUrl() . '/js/szczegoly.js');
+?>
+
+<div class="albumtitle">
+    Wyszukiwanie: <?php echo $this->fraza; ?>
+</div>
+<div class="scroller_album">
+    <div class="album">
+        <?php
+        $i = 0;
+        $jest = 0;
+        if($this->katalogi_zdjec != null) {
+            foreach($this->katalogi_zdjec as $katalog) {
+                if($katalog != null) {
+                    $jest = 1;
+                }
+            }
+        }
+        if ($jest) {
+            foreach ($this->katalogi_zdjec as $zdjecia) {
+                foreach ($zdjecia as $zdjecie) {
+                    $katalog = $this->katalogi_sciezka[$i];
+        ?>
+                    <div class="zdjecie" id="<?php echo $zdjecie->getId(); ?>">
+
+                        <div class="miniatura">
+                            <?php
+                            //ładowanie miniatur z exifa
+                            $file = $katalog . '/' . $zdjecie->getFilename();
+                            $image = exif_thumbnail($file, $width, $height);
+                            $s = $width / $height;
+                            $h = 100;
+                            $w = $h * $s;
+                            if($w > 130) $w = 130;
+                            ?>
+                            <img src='data:image/gif;base64, <?php echo base64_encode($image); ?>'
+                                 id="<?php echo $zdjecie->getId(); ?>"
+                                 title="<?php echo $zdjecie->getFilename(); ?>"
+                                 height="<?php echo $h ?>px" width="<?php echo $w ?>px"
+                                 class="center" alt=""/>
+                        </div>
+
+                        <div class="szczegoly" id="<?php echo $zdjecie->getId(); ?>">
+                            <a href="<?php echo $this->baseUrl() . '/' . $katalog . '/' . $zdjecie->getFilename(); ?>"
+                                       rel="prettyPhoto[gallery2]"
+                                       title="<?php echo $zdjecie->getFilename(); ?>">
+                                <img src="<?php echo $this->baseUrl(); ?>/images/preview.png"
+                                     id="<?php echo $zdjecie->getId(); ?>"
+                                     alt="podglad" />
+                            </a>
+                            <a href="/zdjecia/pobierz/zdjecie/<?php echo $zdjecie->getId(); ?>">
+                                <img src="<?php echo $this->baseUrl(); ?>/images/save.png"
+                                     alt="Pobierz"
+                                     title="Pobierz"/>
+                            </a>
+                            <img style="float: right;" class="usun pointer"
+                                 id="<?php echo $zdjecie->getId(); ?>"
+                                 src="<?php echo $this->baseUrl(); ?>/images/remove.png"
+                                 alt="usun"
+                                 title="Usuń"/>
+                        </div>
+                    </div>
+        <?php
+                }
+                $i++;
+            }
+        } else { ?>
+            <h2 style="margin-left: 10px;">Brak wyników.</h2>
+        <?php } ?>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+<?php $this->jQuery()->enable(); ?>
+<?php echo $this->headScript()->appendFile($this->baseUrl() . '/js/jeditable/jquery.jeditable.js')
+                              ->appendFile($this->baseUrl() . '/js/metadaneEdytuj.js'); ?>
+
+<script type="text/javascript">
+    $(function() {
+        $( "#tabs" ).tabs();
+    });
+</script>
+
+<div class="ui-state-highlight ui-corner-all center" style="width: 200px; margin-top: 5px; margin-left: 25px; padding:5px;">
+    <span class="ui-icon ui-icon-info" style="float: left"></span>
+    Liczba opisywanych zdjęć: <?php echo $this->liczba_opisywanych; ?><br />
+</div>
+<div class="" style="width: 270px;">
+    <div id="tabs">
+        <ul>
+            <li><a href="#iptc">Opis grupowy zdjęć</a></li>
+        </ul>        
+        <div id="iptc">
+            <table id="<?php echo $this->id_zdjec; ?>">
+                <thead>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nagłówek</td>
+                        <td class="metadane" id="headline"></td>
+                    </tr>
+                    <tr>
+                        <td>Opis</td>
+                        <td class="metadane" id="caption"></td>
+                    </tr>
+                    <tr>
+                        <td>Autor</td>
+                        <td class="metadane" id="writer"></td>
+                    </tr>
+                    <tr>
+                        <td>Prawa autorskie</td>
+                        <td class="metadane" id="copyrigthNotice"></td>
+                    </tr>
+                    <tr>
+                        <td>Kontakt</td>
+                        <td class="metadane" id="contact"></td>
+                    </tr>
+                    <tr>
+                        <td>Nazwa obiektu</td>
+                        <td class="metadane" id="objectName"></td>
+                    </tr>
+                    <tr>
+                        <td>Tytuł autora</td>
+                        <td class="metadane" id="byLineTitle"></td>
+                    </tr>
+                    <tr>
+                        <td>Miasto</td>
+                        <td class="metadane" id="city"></td>
+                    </tr>
+                    <tr>
+                        <td>Ulica</td>
+                        <td class="metadane" id="subLocation"></td>
+                    </tr>
+                    <tr>
+                        <td>Województwo</td>
+                        <td class="metadane" id="province"></td>
+                    </tr>
+                    <tr>
+                        <td>Kod państwa</td>
+                        <td class="metadane" id="countryCode"></td>
+                    </tr>
+                    <tr>
+                        <td>Państwo</td>
+                        <td class="metadane" id="country"></td>
+                    </tr>
+                    <tr>
+                        <td>Słowa kluczowe</td>
+                        <td class="metadane" id="keywords"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

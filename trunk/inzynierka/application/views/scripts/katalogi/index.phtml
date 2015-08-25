@@ -1,0 +1,48 @@
+<?php $this->jQuery()->enable(); ?>
+<?= $this->headLink()->appendStylesheet($this->baseUrl() . '/css/myui.css');?>
+<?php echo $this->headScript()->appendFile('/js/jeditable/jquery.jeditable.js')
+                              ->appendFile('/js/katalogi.js'); ?>
+<div style="margin-left: 10px;">
+    <a href="<?= $this->baseUrl(); ?>/zdjecia/" title="Powrót"
+       style="float: left; margin-top: -10px;">
+        <img src="<?= $this->baseUrl(); ?>/images/back.png"
+             title="Powrót"
+             alt="powrot" />
+    </a>
+
+<span id="nowy" style="display: none;"><?php echo $this->form; ?></span>
+<h3>Katalogi:
+<button class="dodaj myui" id="nowy" title="Dodaj">Dodaj</button>
+</h3>
+    <br />
+<?php echo $this->message; ?>
+<table class="ui-widget-content ui-corner-bottom">
+    <thead>
+        <tr>
+            <th>Nr</th>
+            <th></th>
+            <th>Nazwa katalogu</th>
+            <th>Data utworzenia</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php $a = 1; ?>
+        <?php foreach ($this->lista as $katalog) : ?>
+        <tr id="<?php echo $katalog->getId(); ?>">
+            <td><?php echo $a++; ?></td>
+            <td>
+                <img src="<?php echo $this->baseUrl(); ?>/images/folder.png"
+                     alt="ikona" />
+            </td>
+            <td class="jeditable" id="<?php echo $katalog->getId(); ?>"><?php echo $katalog->getName(); ?></td>
+            <td><?php echo $katalog->getDate(); ?></td>
+            <td>
+                <button class="usun myui" id="<?php echo $katalog->getId(); ?>"
+                        title="Usuń">Usuń</button>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+</div>
